@@ -17,6 +17,7 @@ struct MyApp: App {
     
     var body: some Scene {
         WindowGroup {
+            
             NavigationView {
                 if firstName.isEmpty || lastName.isEmpty || email.isEmpty {
                     OnboardingView()
@@ -28,7 +29,7 @@ struct MyApp: App {
                                 Text("Home")
                             }
                         
-                        ProfileView()
+                        UserProfile()
                             .tabItem {
                                 Image(systemName: "person.crop.circle")
                                 Text("Profile")

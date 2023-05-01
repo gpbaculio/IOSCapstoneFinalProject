@@ -12,13 +12,17 @@ import CoreData
 struct HomeView: View {
     var body: some View {
         VStack {
-            Text("Home Screen")
-                .font(.largeTitle)
-                .padding()
+            HeaderView()
+            VStack {
+                Text("Home Screen")
+                    .font(.largeTitle)
+                    .padding()
+            }
+            .frame(maxWidth: .infinity, maxHeight: .infinity)
+            .padding(.horizontal, 30)
+            .background(mainBg)
+            .padding(.bottom, 15)
+       
         }
-        .frame(maxWidth: .infinity, maxHeight: .infinity)
-        .padding(.horizontal, 30)
-        .background(mainBg)
-        .padding(.bottom, 15)
     }
 }

@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		674476EE29FEC9D50004C4BC /* ProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 674476ED29FEC9D50004C4BC /* ProfileView.swift */; };
+		674476EE29FEC9D50004C4BC /* UserProfile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 674476ED29FEC9D50004C4BC /* UserProfile.swift */; };
 		674476F429FEDB960004C4BC /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 674476F329FEDB960004C4BC /* HomeView.swift */; };
 		675BA04429FB226A00AAB4F4 /* CapstoneIosFinalApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 675BA04329FB226A00AAB4F4 /* CapstoneIosFinalApp.swift */; };
 		675BA04829FB226A00AAB4F4 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 675BA04729FB226A00AAB4F4 /* Assets.xcassets */; };
@@ -18,6 +18,8 @@
 		675BA06429FB226B00AAB4F4 /* CapstoneIosFinalUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 675BA06329FB226B00AAB4F4 /* CapstoneIosFinalUITests.swift */; };
 		675BA06629FB226B00AAB4F4 /* CapstoneIosFinalUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 675BA06529FB226B00AAB4F4 /* CapstoneIosFinalUITestsLaunchTests.swift */; };
 		675BA07329FB23A900AAB4F4 /* Onboarding.swift in Sources */ = {isa = PBXBuildFile; fileRef = 675BA07229FB23A900AAB4F4 /* Onboarding.swift */; };
+		67A5CBC42A0038A4004F3E07 /* Header.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67A5CBC32A0038A4004F3E07 /* Header.swift */; };
+		67A5CBC82A00529A004F3E07 /* LogoutView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67A5CBC72A00529A004F3E07 /* LogoutView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -38,7 +40,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		674476ED29FEC9D50004C4BC /* ProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileView.swift; sourceTree = "<group>"; };
+		674476ED29FEC9D50004C4BC /* UserProfile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserProfile.swift; sourceTree = "<group>"; };
 		674476F329FEDB960004C4BC /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
 		675BA04029FB226A00AAB4F4 /* CapstoneIosFinal.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CapstoneIosFinal.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		675BA04329FB226A00AAB4F4 /* CapstoneIosFinalApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CapstoneIosFinalApp.swift; sourceTree = "<group>"; };
@@ -52,6 +54,8 @@
 		675BA06329FB226B00AAB4F4 /* CapstoneIosFinalUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CapstoneIosFinalUITests.swift; sourceTree = "<group>"; };
 		675BA06529FB226B00AAB4F4 /* CapstoneIosFinalUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CapstoneIosFinalUITestsLaunchTests.swift; sourceTree = "<group>"; };
 		675BA07229FB23A900AAB4F4 /* Onboarding.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Onboarding.swift; sourceTree = "<group>"; };
+		67A5CBC32A0038A4004F3E07 /* Header.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Header.swift; sourceTree = "<group>"; };
+		67A5CBC72A00529A004F3E07 /* LogoutView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogoutView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -104,8 +108,10 @@
 			children = (
 				675BA04329FB226A00AAB4F4 /* CapstoneIosFinalApp.swift */,
 				675BA07229FB23A900AAB4F4 /* Onboarding.swift */,
+				67A5CBC32A0038A4004F3E07 /* Header.swift */,
 				674476F329FEDB960004C4BC /* HomeView.swift */,
-				674476ED29FEC9D50004C4BC /* ProfileView.swift */,
+				67A5CBC72A00529A004F3E07 /* LogoutView.swift */,
+				674476ED29FEC9D50004C4BC /* UserProfile.swift */,
 				675BA04729FB226A00AAB4F4 /* Assets.xcassets */,
 				675BA04C29FB226A00AAB4F4 /* Persistence.swift */,
 				675BA04E29FB226A00AAB4F4 /* CapstoneIosFinal.xcdatamodeld */,
@@ -272,8 +278,10 @@
 				675BA04D29FB226A00AAB4F4 /* Persistence.swift in Sources */,
 				674476F429FEDB960004C4BC /* HomeView.swift in Sources */,
 				675BA07329FB23A900AAB4F4 /* Onboarding.swift in Sources */,
+				67A5CBC82A00529A004F3E07 /* LogoutView.swift in Sources */,
+				67A5CBC42A0038A4004F3E07 /* Header.swift in Sources */,
 				675BA04429FB226A00AAB4F4 /* CapstoneIosFinalApp.swift in Sources */,
-				674476EE29FEC9D50004C4BC /* ProfileView.swift in Sources */,
+				674476EE29FEC9D50004C4BC /* UserProfile.swift in Sources */,
 				675BA05029FB226A00AAB4F4 /* CapstoneIosFinal.xcdatamodeld in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
