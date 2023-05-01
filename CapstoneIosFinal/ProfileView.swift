@@ -6,6 +6,9 @@ struct ProfileView: View {
     @State private var showImagePicker = false
     @State private var imageUpdated = false // added state variable
     @AppStorage("profileImage") private var profileImage: Data = Data()
+    @AppStorage("firstName") var firstName = ""
+    @AppStorage("lastName") var lastName = ""
+    @AppStorage("email") var email = ""
 
 
     private var imageURL: URL? {
@@ -48,7 +51,14 @@ struct ProfileView: View {
                     .cornerRadius(10)
                     .fontWeight(.medium)
             }
-            
+            TextField("First Name", text: $firstName)
+                .textFieldStyle(RoundedBorderTextFieldStyle()).padding(.top, 6)
+            TextField("Last Name", text: $lastName)
+                .textFieldStyle(RoundedBorderTextFieldStyle()).padding(.top, 6)
+            TextField("Email", text: $email)
+                .textFieldStyle(RoundedBorderTextFieldStyle())
+                .padding(.top, 6)
+                .padding(.bottom, 12)
             Spacer()
         }
         .sheet(isPresented: $showImagePicker) {
@@ -57,6 +67,9 @@ struct ProfileView: View {
                 self.imageUpdated.toggle() // added toggle to update view
             }
         }
+        .padding(.horizontal, 30)
+        .background(mainBg)
+        .padding(.bottom, 15)
     }
 
     private func saveImageToDisk(_ image: UIImage) {

@@ -11,7 +11,9 @@ struct MyApp: App {
     @AppStorage("lastName") var lastName = ""
     @AppStorage("email") var email = ""
    
-  
+    init() {
+           UITabBar.appearance().backgroundColor = UIColor.white
+       }
     
     var body: some Scene {
         WindowGroup {
@@ -32,8 +34,8 @@ struct MyApp: App {
                                 Text("Profile")
                             }
                     }
-                    .accentColor(.purple)
-                    .environment(\.managedObjectContext, persistenceController.container.viewContext)
+                    .accentColor(mainColor)
+                    .environment(\.managedObjectContext, persistenceController.container.viewContext) 
                 }
             }
             .environment(\.managedObjectContext, persistenceController.container.viewContext)
