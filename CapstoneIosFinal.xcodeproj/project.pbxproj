@@ -7,8 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		674476EE29FEC9D50004C4BC /* ProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 674476ED29FEC9D50004C4BC /* ProfileView.swift */; };
+		674476F429FEDB960004C4BC /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 674476F329FEDB960004C4BC /* HomeView.swift */; };
 		675BA04429FB226A00AAB4F4 /* CapstoneIosFinalApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 675BA04329FB226A00AAB4F4 /* CapstoneIosFinalApp.swift */; };
-		675BA04629FB226A00AAB4F4 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 675BA04529FB226A00AAB4F4 /* ContentView.swift */; };
 		675BA04829FB226A00AAB4F4 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 675BA04729FB226A00AAB4F4 /* Assets.xcassets */; };
 		675BA04B29FB226A00AAB4F4 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 675BA04A29FB226A00AAB4F4 /* Preview Assets.xcassets */; };
 		675BA04D29FB226A00AAB4F4 /* Persistence.swift in Sources */ = {isa = PBXBuildFile; fileRef = 675BA04C29FB226A00AAB4F4 /* Persistence.swift */; };
@@ -16,6 +17,7 @@
 		675BA05A29FB226B00AAB4F4 /* CapstoneIosFinalTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 675BA05929FB226B00AAB4F4 /* CapstoneIosFinalTests.swift */; };
 		675BA06429FB226B00AAB4F4 /* CapstoneIosFinalUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 675BA06329FB226B00AAB4F4 /* CapstoneIosFinalUITests.swift */; };
 		675BA06629FB226B00AAB4F4 /* CapstoneIosFinalUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 675BA06529FB226B00AAB4F4 /* CapstoneIosFinalUITestsLaunchTests.swift */; };
+		675BA07329FB23A900AAB4F4 /* Onboarding.swift in Sources */ = {isa = PBXBuildFile; fileRef = 675BA07229FB23A900AAB4F4 /* Onboarding.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -36,9 +38,10 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		674476ED29FEC9D50004C4BC /* ProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileView.swift; sourceTree = "<group>"; };
+		674476F329FEDB960004C4BC /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
 		675BA04029FB226A00AAB4F4 /* CapstoneIosFinal.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CapstoneIosFinal.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		675BA04329FB226A00AAB4F4 /* CapstoneIosFinalApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CapstoneIosFinalApp.swift; sourceTree = "<group>"; };
-		675BA04529FB226A00AAB4F4 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		675BA04729FB226A00AAB4F4 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		675BA04A29FB226A00AAB4F4 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		675BA04C29FB226A00AAB4F4 /* Persistence.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Persistence.swift; sourceTree = "<group>"; };
@@ -48,6 +51,7 @@
 		675BA05F29FB226B00AAB4F4 /* CapstoneIosFinalUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CapstoneIosFinalUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		675BA06329FB226B00AAB4F4 /* CapstoneIosFinalUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CapstoneIosFinalUITests.swift; sourceTree = "<group>"; };
 		675BA06529FB226B00AAB4F4 /* CapstoneIosFinalUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CapstoneIosFinalUITestsLaunchTests.swift; sourceTree = "<group>"; };
+		675BA07229FB23A900AAB4F4 /* Onboarding.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Onboarding.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -99,7 +103,9 @@
 			isa = PBXGroup;
 			children = (
 				675BA04329FB226A00AAB4F4 /* CapstoneIosFinalApp.swift */,
-				675BA04529FB226A00AAB4F4 /* ContentView.swift */,
+				675BA07229FB23A900AAB4F4 /* Onboarding.swift */,
+				674476F329FEDB960004C4BC /* HomeView.swift */,
+				674476ED29FEC9D50004C4BC /* ProfileView.swift */,
 				675BA04729FB226A00AAB4F4 /* Assets.xcassets */,
 				675BA04C29FB226A00AAB4F4 /* Persistence.swift */,
 				675BA04E29FB226A00AAB4F4 /* CapstoneIosFinal.xcdatamodeld */,
@@ -264,8 +270,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				675BA04D29FB226A00AAB4F4 /* Persistence.swift in Sources */,
-				675BA04629FB226A00AAB4F4 /* ContentView.swift in Sources */,
+				674476F429FEDB960004C4BC /* HomeView.swift in Sources */,
+				675BA07329FB23A900AAB4F4 /* Onboarding.swift in Sources */,
 				675BA04429FB226A00AAB4F4 /* CapstoneIosFinalApp.swift in Sources */,
+				674476EE29FEC9D50004C4BC /* ProfileView.swift in Sources */,
 				675BA05029FB226A00AAB4F4 /* CapstoneIosFinal.xcdatamodeld in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
