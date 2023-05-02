@@ -5,6 +5,7 @@
 
 import Foundation
 import CoreData
+import SwiftUI
 
 
 extension Dish {
@@ -12,11 +13,11 @@ extension Dish {
     static func createDishesFrom(menuItems:[MenuItem],
                                  _ context:NSManagedObjectContext) {
         for menuItem in menuItems {
-            guard let _ = exists(name: menuItem.title, context) else {
+            guard exists(title: menuItem.title, context) == false else {
                 continue
             }
+            print("will create dish!", menuItem.title)
             let oneDish = Dish(context: context)
-            oneDish.id = Int64(menuItem.id)
             oneDish.title = menuItem.title
             oneDish.price = menuItem.price
             oneDish.desc = menuItem.desc
@@ -26,22 +27,34 @@ extension Dish {
     }
     
     
-    static func exists(name: String,
+    static func exists(title: String,
                        _ context:NSManagedObjectContext) -> Bool? {
         let request = Dish.request()
-        let predicate = NSPredicate(format: "title CONTAINS[cd] %@", name)
+        let predicate = NSPredicate(format: "title CONTAINS[cd] %@", title)
         request.predicate = predicate
         
         do {
             guard let results = try context.fetch(request) as? [Dish]
+                    
             else {
                 return nil
             }
+            print("results",results)
             return results.count > 0
         } catch (let error){
             print(error.localizedDescription)
             return false
         }
     }
+    func saveImage(_ image: UIImage) {
+            self.imageData = image.jpegData(compressionQuality: 1.0)
+        }
+        
+        func getImage() -> UIImage? {
+            guard let imageData = self.imageData else {
+                return nil
+            }
+            return UIImage(data: imageData)
+        }
     
 }

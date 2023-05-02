@@ -12,25 +12,9 @@ import CoreData
 struct HomeView: View {
     @Environment(\.managedObjectContext) private var viewContext
       
-    @ObservedObject var dishesModel = DishesModel()
+    
     
     @State private var searchText: String = ""
-    
-    private func buildPredicate() -> NSPredicate {
-       return searchText == "" ?
-       NSPredicate(value: true) :
-       NSPredicate(format: "title CONTAINS[cd] %@", searchText)
-   }
-       
-   private func buildSortDescriptors() -> [NSSortDescriptor] {
-       [
-            NSSortDescriptor(
-                key: "title",
-                ascending: true,
-                selector:#selector(NSString.localizedStandardCompare)
-            )
-       ]
-   }
     
     var body: some View {
         VStack {
@@ -80,28 +64,30 @@ struct HomeView: View {
                 .padding(.vertical, 10)
                 
                 VStack(alignment: .leading) {
-                    HStack {
-                        Text("ORDER FOR DELIVERY!")
-                            .foregroundColor(.black)
-                            .font(.system(size: 21))
-                            .fontWeight(.bold)
-                        Spacer()
-                    }.padding(.leading, 15)
-                    .padding(.vertical, 15)
+                    VStack {
+                        HStack {
+                            Text("ORDER FOR DELIVERY!")
+                                .foregroundColor(.black)
+                                .font(.system(size: 21))
+                                .fontWeight(.bold)
+                            Spacer()
+                        }
+                        .padding(.leading, 15)
+                        .padding(.vertical, 15)
+                    
+                    }
                     NavigationView {
                         ScrollView {
                         FetchedObjects(
                             predicate:buildPredicate(),
                             sortDescriptors: buildSortDescriptors()) {
                                 (dishes: [Dish]) in
-                                    ForEach(dishes, id:\.self) { dish in
+                                ForEach(dishes, id:\.self) { dish in
+                                   
                                         DisplayDish(dish)
                                     }
                             }
                         }
-                   }
-                    .task {
-                       await dishesModel.reload(viewContext)
                    }
                 }
                 .frame(maxWidth: .infinity)
@@ -109,7 +95,23 @@ struct HomeView: View {
             }
             .frame(maxWidth: .infinity)
         }.background(mainColor)
-        
+            
+    }
+    
+    private func buildPredicate() -> NSPredicate {
+       return searchText == "" ?
+       NSPredicate(value: true) :
+       NSPredicate(format: "title CONTAINS[cd] %@", searchText)
+    }
+       
+    private func buildSortDescriptors() -> [NSSortDescriptor] {
+       [
+            NSSortDescriptor(
+                key: "title",
+                ascending: true,
+                selector:#selector(NSString.localizedStandardCompare)
+            )
+       ]
     }
 }
 

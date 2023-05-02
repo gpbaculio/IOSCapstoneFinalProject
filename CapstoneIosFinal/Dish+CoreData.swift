@@ -1,13 +1,58 @@
 import Foundation
 import CoreData
 
-extension Dish {
-    
+extension Dish { 
     static func request() -> NSFetchRequest<NSFetchRequestResult> {
         let request: NSFetchRequest<NSFetchRequestResult> = NSFetchRequest(entityName: String(describing: Self.self))
         request.returnsDistinctResults = true
         request.returnsObjectsAsFaults = true
         return request
+    }
+    
+    static func with(name: String,
+                     _ context:NSManagedObjectContext) -> Dish? {
+        let request = Dish.request()
+        
+        let predicate = NSPredicate(format: "title == %@", name)
+        request.predicate = predicate
+        
+        let sortDescriptor = NSSortDescriptor(key: "title",
+                                              ascending: false,
+                                              selector: #selector(NSString .localizedStandardCompare))
+        request.sortDescriptors = [sortDescriptor]
+        
+        do {
+            guard let results = try context.fetch(request) as? [Dish],
+                  results.count == 1,
+                  let dish = results.first
+            else { return Dish(context: context) }
+            return dish
+        } catch (let error){
+            print(error.localizedDescription)
+            return nil
+        }
+    }
+    
+    static func delete(with name: String,
+                       _ context:NSManagedObjectContext) -> Bool {
+        let request = Dish.request()
+        
+        let predicate = NSPredicate(format: "title == %@", name)
+        request.predicate = predicate
+        
+        do {
+            guard let results = try context.fetch(request) as? [Dish],
+                  results.count == 1,
+                  let dish = results.first
+            else {
+                return false
+            }
+            context.delete(dish)
+            return true
+        } catch (let error){
+            print(error.localizedDescription)
+            return false
+        }
     }
     
     class func deleteAll(_ context:NSManagedObjectContext) {

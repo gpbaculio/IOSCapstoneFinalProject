@@ -1,7 +1,6 @@
+import CoreData
 import Foundation
 import SwiftUI
-import CoreData
-
 
 struct FetchedObjects<T, Content>: View where T : NSManagedObject, Content : View {
     
