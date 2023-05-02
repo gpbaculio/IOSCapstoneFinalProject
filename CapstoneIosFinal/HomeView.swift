@@ -10,9 +10,23 @@ import SwiftUI
 import CoreData
 
 struct HomeView: View {
+    @Environment(\.managedObjectContext) private var viewContext
+      
+    @ObservedObject var dishesModel = DishesModel()
     
     @State private var searchText: String = ""
-    
+    private func buildPredicate() -> NSPredicate {
+           return searchText == "" ?
+           NSPredicate(value: true) :
+           NSPredicate(format: "title CONTAINS[cd] %@", searchText)
+       }
+       
+       private func buildSortDescriptors() -> [NSSortDescriptor] {
+           [NSSortDescriptor(key: "title",
+                             ascending: true,
+                             selector:
+                               #selector(NSString.localizedStandardCompare))]
+       }
     var body: some View {
         VStack {
             HeaderView()
@@ -30,6 +44,7 @@ struct HomeView: View {
                     Spacer()
                 }
                 .padding(.leading, 15)
+                
                 HStack(alignment: .bottom) {
                     Text("We are a family owned Mediterranean restaurant, focused on traditional recipes served with a modern twist.")
                         .frame(maxHeight: 165)
@@ -46,6 +61,7 @@ struct HomeView: View {
                         .padding(.trailing, 15)
                 }
                 .padding(.leading, 15)
+                
                 HStack {
                     Image(systemName: "magnifyingglass")
                         .foregroundColor(.gray)
@@ -56,17 +72,45 @@ struct HomeView: View {
                 .background(.white)
                 .cornerRadius(10)
                 .padding(.horizontal, 15)
-                .padding(.top, 10)
-            }.frame(maxWidth: .infinity )
-           Spacer()
+                .padding(.vertical, 10)
+                
+                VStack(alignment: .leading) {
+                    HStack {
+                        Text("ORDER FOR DELIVERY!")
+                            .foregroundColor(.black)
+                            .font(.system(size: 21))
+                            .fontWeight(.bold)
+                        Spacer()
+                    }.padding(.leading, 15)
+                    .padding(.vertical, 15)
+                    NavigationView {
+                       FetchedObjects(
+                           predicate:buildPredicate(),
+                           sortDescriptors: buildSortDescriptors()) {
+                               (dishes: [Dish]) in
+                               List {
+                                   ForEach(dishes, id:\.self) { dish in
+                                       DisplayDish(dish)
+                                   }
+                               }
+                           }
+                   }
+                    .task {
+                       await dishesModel.reload(viewContext)
+                   }
+                }
+                .frame(maxWidth: .infinity)
+                .background(.white)
+                
+               
+            }
+            .frame(maxWidth: .infinity) 
+            
             
         }.background(mainColor)
+        
     }
 }
 
-struct HomeView_Previews: PreviewProvider {
-    static var previews: some View {
-        HomeView().environment(\.managedObjectContext, PersistenceController.preview.container.viewContext)
-    }
-}
+ 
 

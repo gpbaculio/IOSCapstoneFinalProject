@@ -91,8 +91,4 @@ struct OnboardingView: View {
  
  
 
-struct OnboardingView_Previews: PreviewProvider {
-    static var previews: some View {
-        OnboardingView().environment(\.managedObjectContext, PersistenceController.preview.container.viewContext)
-    }
-}
+ 
