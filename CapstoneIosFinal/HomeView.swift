@@ -15,18 +15,23 @@ struct HomeView: View {
     @ObservedObject var dishesModel = DishesModel()
     
     @State private var searchText: String = ""
+    
     private func buildPredicate() -> NSPredicate {
-           return searchText == "" ?
-           NSPredicate(value: true) :
-           NSPredicate(format: "title CONTAINS[cd] %@", searchText)
-       }
+       return searchText == "" ?
+       NSPredicate(value: true) :
+       NSPredicate(format: "title CONTAINS[cd] %@", searchText)
+   }
        
-       private func buildSortDescriptors() -> [NSSortDescriptor] {
-           [NSSortDescriptor(key: "title",
-                             ascending: true,
-                             selector:
-                               #selector(NSString.localizedStandardCompare))]
-       }
+   private func buildSortDescriptors() -> [NSSortDescriptor] {
+       [
+            NSSortDescriptor(
+                key: "title",
+                ascending: true,
+                selector:#selector(NSString.localizedStandardCompare)
+            )
+       ]
+   }
+    
     var body: some View {
         VStack {
             HeaderView()
