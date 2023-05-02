@@ -17,24 +17,42 @@ struct OnboardingView: View {
     let defaults = UserDefaults.standard
 //    @EnvironmentObject var appState: AppState
     @Environment(\.managedObjectContext) private var viewContext
+    @State private var showValidationAlert = false
  
 
     @State private var firstName = ""
     @State private var lastName = ""
     @State private var email = ""
     
+    private func isValidEmail(_ email: String) -> Bool {
+          // Validate email using regular expression
+          let emailRegEx = "[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,}"
+          let emailPred = NSPredicate(format:"SELF MATCHES %@", emailRegEx)
+          return emailPred.evaluate(with: email)
+      }
+    
     private func handleRegistration() {
- 
-  
-        do {
-            try viewContext.save()
-            defaults.set(firstName, forKey: "firstName")
-            defaults.set(lastName, forKey: "lastName")
-            defaults.set(email, forKey: "email")
-        } catch { 
-            print("Failed to save user: \(error.localizedDescription)")
-        }
-    }
+         guard !firstName.isEmpty else {
+             showValidationAlert = true
+             return
+         }
+         guard !lastName.isEmpty else {
+             showValidationAlert = true
+             return
+         }
+         guard isValidEmail(email) else {
+             showValidationAlert = true
+             return
+         }
+         do {
+             try viewContext.save()
+             defaults.set(firstName, forKey: "firstName")
+             defaults.set(lastName, forKey: "lastName")
+             defaults.set(email, forKey: "email")
+         } catch {
+             print("Failed to save user: \(error.localizedDescription)")
+         }
+     }
 
     var body: some View {
         VStack {
@@ -66,15 +84,19 @@ struct OnboardingView: View {
                         self.email = value
                     }
                 Button(action: {
-                           handleRegistration()
-                       }) {
-                           Text("Register")
-                               .font(.headline)
-                               .foregroundColor(secondaryColor)
-                               .padding()
-                       }
-                       .frame(width: 200)
-                       .background(mainColor).cornerRadius(10)
+                   handleRegistration()
+                }) {
+                   Text("Register")
+                       .font(.headline)
+                       .foregroundColor(secondaryColor)
+                       .padding()
+                }
+                .frame(width: 200)
+                .background(mainColor)
+                .cornerRadius(10)
+                .alert(isPresented: $showValidationAlert) {
+                    Alert(title: Text("Error"), message: Text("Please enter a valid first name, last name, and email."), dismissButton: .default(Text("OK")))
+                }
                 Spacer()
             }
             .padding(.horizontal, 30)
