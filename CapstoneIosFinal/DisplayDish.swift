@@ -48,35 +48,42 @@ struct DisplayDish: View {
             Spacer()
           
             if let uiImage = dishImage {
-                  Image(uiImage: uiImage)
-                      .resizable()
-                      .cornerRadius(10)
-                      .aspectRatio(contentMode: .fit)
-                      .frame(width: 100, height: 100)
-              } else {
-                  // Display a placeholder image
-                  Image(systemName: "photo")
-                      .resizable()
-                      .aspectRatio(contentMode: .fit)
-                      .frame(width: 100, height: 100)
-                      .foregroundColor(.gray)
-                      .onAppear {
-                          if let imageUrlString = dish.image, let imageUrl = URL(string: imageUrlString) {
-                              URLSession.shared.dataTask(with: imageUrl) { data, response, error in
-                                  if let imageData = data, let uiImage = UIImage(data: imageData) {
-                                      DispatchQueue.main.async {
-                                          self.dishImage = uiImage
-                                      }
-                                  } else {
-                                      // Display another image in case of an error
-                                      DispatchQueue.main.async {
-                                          self.dishImage = UIImage(named: "error_image")
-                                      }
-                                  }
-                              }.resume()
-                          }
-                      }
-              }
+                 Image(uiImage: uiImage)
+                     .resizable()
+                     .cornerRadius(10)
+                     .aspectRatio(contentMode: .fit)
+                     .frame(width: 100, height: 100)
+             } else {
+                 // Display a placeholder image
+                 Image(systemName: "photo")
+                     .resizable()
+                     .aspectRatio(contentMode: .fit)
+                     .frame(width: 100, height: 100)
+                     .foregroundColor(.gray)
+                     .onAppear {
+                         if let imageUrlString = dish.image, let imageUrl = URL(string: imageUrlString) {
+                             let request = URLRequest(url: imageUrl)
+                             let cache = URLCache.shared
+                             if let data = cache.cachedResponse(for: request)?.data, let uiImage = UIImage(data: data) {
+                                 self.dishImage = uiImage
+                             } else {
+                                 URLSession.shared.dataTask(with: request) { data, response, error in
+                                     if let imageData = data, let uiImage = UIImage(data: imageData) {
+                                         cache.storeCachedResponse(CachedURLResponse(response: response!, data: imageData), for: request)
+                                         DispatchQueue.main.async {
+                                             self.dishImage = uiImage
+                                         }
+                                     } else {
+                                         // Display another image in case of an error
+                                         DispatchQueue.main.async {
+                                             self.dishImage = UIImage(named: "error_image")
+                                         }
+                                     }
+                                 }.resume()
+                             }
+                         }
+                     }
+             }
         }.padding(.horizontal, 15)
         Divider()
     }
