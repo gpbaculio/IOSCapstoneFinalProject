@@ -94,7 +94,6 @@ struct HomeView: View {
                                     }
                             }
                         }
-                   
                    }
                     .task {
                        await dishesModel.reload(viewContext)
@@ -102,12 +101,8 @@ struct HomeView: View {
                 }
                 .frame(maxWidth: .infinity)
                 .background(.white)
-                
-               
             }
             .frame(maxWidth: .infinity)
-            
-            
         }.background(mainColor)
         
     }
