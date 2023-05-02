@@ -10,6 +10,9 @@ import SwiftUI
 import CoreData
 
 struct HomeView: View {
+    
+    @State private var searchText: String = ""
+    
     var body: some View {
         VStack {
             HeaderView()
@@ -29,6 +32,7 @@ struct HomeView: View {
                 .padding(.leading, 15)
                 HStack(alignment: .bottom) {
                     Text("We are a family owned Mediterranean restaurant, focused on traditional recipes served with a modern twist.")
+                        .frame(maxHeight: 165)
                         .foregroundColor(.white)
                         .font(.system(size: 18))
                         .fontWeight(.regular)
@@ -42,6 +46,17 @@ struct HomeView: View {
                         .padding(.trailing, 15)
                 }
                 .padding(.leading, 15)
+                HStack {
+                    Image(systemName: "magnifyingglass")
+                        .foregroundColor(.gray)
+                    TextField("Search", text: $searchText)
+                        .frame(maxHeight: 40)
+                }
+                .padding(.horizontal)
+                .background(.white)
+                .cornerRadius(10)
+                .padding(.horizontal, 15)
+                .padding(.top, 10)
             }.frame(maxWidth: .infinity )
            Spacer()
             
