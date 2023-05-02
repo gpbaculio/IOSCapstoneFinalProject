@@ -14,7 +14,11 @@ struct HomeView: View {
       
     @ObservedObject var dishesModel = DishesModel()
   
-    var categories: [String]
+    private var categories: [String]
+       
+   init(categories: [String]) {
+       self.categories = categories
+   }
     
     @State private var searchText: String = ""
     @State private var selectedCategories: [String] = []

@@ -12,13 +12,8 @@ struct MainView: View {
     @State var tabSelection = 0
     @State var previousTabSelection = -1 // any invalid value
     @ObservedObject var dishesModel = DishesModel()
-    
-    var categories: [String] {
-        let categories = dishesModel.menuItems.map { $0.category }
-        let result = Array(Set(categories))
-        print("MainView result",result)
-        return result
-      }
+    @State var categories: [String] = []
+   
     
     init() {
         UITabBar.appearance().backgroundColor = UIColor.white
@@ -54,6 +49,9 @@ struct MainView: View {
         .id(tabSelection)
         .task {
             await dishesModel.reload(viewContext)
+            let latestCategories = dishesModel.menuItems.map { $0.category }
+            let result = Array(Set(latestCategories))
+            categories=result
          }
         .environmentObject(model)
         

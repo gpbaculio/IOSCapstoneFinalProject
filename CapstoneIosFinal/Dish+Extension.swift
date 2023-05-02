@@ -15,14 +15,29 @@ extension Dish {
         for menuItem in menuItems {
             guard exists(title: menuItem.title, context) == false else {
                 continue
-            }
-            print("will create dish!", menuItem.title)
+            } 
             let oneDish = Dish(context: context)
             oneDish.title = menuItem.title
             oneDish.price = menuItem.price
             oneDish.desc = menuItem.desc
             oneDish.image = menuItem.image
-            oneDish.category = menuItem.category 
+            oneDish.category = menuItem.category
+            if let imageUrl = URL(string: menuItem.image) {
+                let cache = URLCache.shared
+                let request = URLRequest(url: imageUrl)
+                if let cachedData = cache.cachedResponse(for: request)?.data {
+                    oneDish.imageData = cachedData
+                } else {
+                    URLSession.shared.dataTask(with: request) { data, response, error in
+                        if let imageData = data {
+                            cache.storeCachedResponse(CachedURLResponse(response: response!, data: imageData), for: request)
+                            DispatchQueue.main.async {
+                                oneDish.imageData = imageData
+                            }
+                        }
+                    }.resume()
+                }
+            }
         }
     }
     
