@@ -13,6 +13,13 @@ struct MainView: View {
     @State var previousTabSelection = -1 // any invalid value
     @ObservedObject var dishesModel = DishesModel()
     
+    var categories: [String] {
+        let categories = dishesModel.menuItems.map { $0.category }
+        let result = Array(Set(categories))
+        print("MainView result",result)
+        return result
+      }
+    
     init() {
         UITabBar.appearance().backgroundColor = UIColor.white
     }
@@ -22,7 +29,7 @@ struct MainView: View {
             if firstName.isEmpty || lastName.isEmpty || email.isEmpty {
                 OnboardingView()
             } else {
-                HomeView()
+                HomeView(categories: categories)
                     .tag(0)
                     .tabItem {
                         Image(systemName: "house")

@@ -12,7 +12,9 @@ import CoreData
 struct HomeView: View {
     @Environment(\.managedObjectContext) private var viewContext
       
-    
+    @ObservedObject var dishesModel = DishesModel()
+  
+    var categories: [String]
     
     @State private var searchText: String = ""
     
@@ -73,8 +75,22 @@ struct HomeView: View {
                             Spacer()
                         }
                         .padding(.leading, 15)
-                        .padding(.vertical, 15)
-                    
+                        .padding(.top, 15)
+                        ScrollView(.horizontal) {
+                            HStack(spacing: 10) {
+                                ForEach(categories, id: \.self) { category in
+                                    Text(category)
+                                        .padding(.horizontal, 10)
+                                        .padding(.vertical, 5)
+                                        .background(mainBg)
+                                        .foregroundColor(mainColor)
+                                        .cornerRadius(10)
+                                }
+                            }
+                            .padding(.horizontal, 10)
+                            .padding(.bottom, 10)
+                        }
+                        Divider()
                     }
                     NavigationView {
                         ScrollView {
