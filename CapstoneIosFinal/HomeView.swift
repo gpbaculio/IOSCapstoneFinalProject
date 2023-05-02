@@ -84,16 +84,17 @@ struct HomeView: View {
                     }.padding(.leading, 15)
                     .padding(.vertical, 15)
                     NavigationView {
-                       FetchedObjects(
-                           predicate:buildPredicate(),
-                           sortDescriptors: buildSortDescriptors()) {
-                               (dishes: [Dish]) in
-                               List {
-                                   ForEach(dishes, id:\.self) { dish in
-                                       DisplayDish(dish)
-                                   }
-                               }
-                           }
+                        ScrollView {
+                        FetchedObjects(
+                            predicate:buildPredicate(),
+                            sortDescriptors: buildSortDescriptors()) {
+                                (dishes: [Dish]) in
+                                    ForEach(dishes, id:\.self) { dish in
+                                        DisplayDish(dish)
+                                    }
+                            }
+                        }
+                   
                    }
                     .task {
                        await dishesModel.reload(viewContext)
@@ -104,7 +105,7 @@ struct HomeView: View {
                 
                
             }
-            .frame(maxWidth: .infinity) 
+            .frame(maxWidth: .infinity)
             
             
         }.background(mainColor)
