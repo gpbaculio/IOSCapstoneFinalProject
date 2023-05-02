@@ -17,6 +17,8 @@ struct HomeView: View {
     var categories: [String]
     
     @State private var searchText: String = ""
+    @State private var selectedCategories: [String] = []
+
     
     var body: some View {
         VStack {
@@ -79,12 +81,20 @@ struct HomeView: View {
                         ScrollView(.horizontal) {
                             HStack(spacing: 10) {
                                 ForEach(categories, id: \.self) { category in
-                                    Text(category)
-                                        .padding(.horizontal, 10)
-                                        .padding(.vertical, 5)
-                                        .background(mainBg)
-                                        .foregroundColor(mainColor)
-                                        .cornerRadius(10)
+                                    Button(action: {
+                                       if selectedCategories.contains(category) {
+                                           selectedCategories.removeAll(where: { $0 == category })
+                                       } else {
+                                           selectedCategories.append(category)
+                                       }
+                                    }) {
+                                           Text(category)
+                                               .padding(.horizontal, 10)
+                                               .padding(.vertical, 5)
+                                               .background(selectedCategories.contains(category) ? mainColor : mainBg)
+                                               .foregroundColor(selectedCategories.contains(category) ? .white : mainColor)
+                                               .cornerRadius(10)
+                                   }
                                 }
                             }
                             .padding(.horizontal, 10)
@@ -115,9 +125,18 @@ struct HomeView: View {
     }
     
     private func buildPredicate() -> NSPredicate {
-       return searchText == "" ?
-       NSPredicate(value: true) :
-       NSPredicate(format: "title CONTAINS[cd] %@", searchText)
+        var predicates: [NSPredicate] = []
+        
+        if !searchText.isEmpty {
+            predicates.append(NSPredicate(format: "title CONTAINS[cd] %@", searchText))
+        }
+        
+        if !selectedCategories.isEmpty {
+            let categoryPredicate = NSPredicate(format: "category IN %@", selectedCategories)
+            predicates.append(categoryPredicate)
+        }
+        
+        return NSCompoundPredicate(andPredicateWithSubpredicates: predicates)
     }
        
     private func buildSortDescriptors() -> [NSSortDescriptor] {
