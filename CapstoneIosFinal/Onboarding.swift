@@ -59,9 +59,41 @@ struct OnboardingView: View {
             VStack {
                 Image("littleLemon")
                     .resizable()
-                    .aspectRatio(contentMode: .fit)
-                    .frame(width: 250)
-                    .padding(.top, 50)
+                    .scaledToFit()
+                    .frame(width: 150, height: 40)
+                    .padding(.bottom,20)
+            }
+            .frame(maxWidth: .infinity)
+            .background(.white)
+            VStack {
+                HStack {
+                    VStack(alignment: .leading) {
+                        Text("Little Lemon")
+                            .foregroundColor(secondaryColor) .font(.system(size: 36))
+                            .fontWeight(.medium)
+                        Text("Chicago")
+                            .foregroundColor(.white)
+                            .font(.system(size: 24))
+                            .fontWeight(.regular)
+                    }
+                    Spacer()
+                } 
+                
+                HStack(alignment: .bottom) {
+                    Text("We are a family owned Mediterranean restaurant, focused on traditional recipes served with a modern twist.")
+                        .frame(maxHeight: 165)
+                        .foregroundColor(.white)
+                        .font(.system(size: 18))
+                        .fontWeight(.regular)
+                        .frame(maxWidth: 242)
+                        .padding(.bottom, 5)
+                    Image("Hero image")
+                        .resizable()
+                        .aspectRatio(1, contentMode: .fill)
+                        .frame(maxWidth: 147, maxHeight: 152)
+                        .cornerRadius(10)
+                        .padding(.trailing, 15)
+                }
                 Spacer()
                 TextField("First Name", text: $firstName)
                     .onChange(of: firstName) { value in
@@ -88,11 +120,11 @@ struct OnboardingView: View {
                 }) {
                    Text("Register")
                        .font(.headline)
-                       .foregroundColor(secondaryColor)
+                       .foregroundColor(mainColor)
                        .padding()
                 }
                 .frame(width: 200)
-                .background(mainColor)
+                .background(secondaryColor)
                 .cornerRadius(10)
                 .alert(isPresented: $showValidationAlert) {
                     Alert(title: Text("Error"), message: Text("Please enter a valid first name, last name, and email."), dismissButton: .default(Text("OK")))
@@ -102,7 +134,7 @@ struct OnboardingView: View {
             .padding(.horizontal, 30)
         }
         .frame(maxWidth: .infinity, maxHeight: .infinity)
-        .background(mainBg)
+        .background(mainColor)
         .navigationBarHidden(true)
       
     }
