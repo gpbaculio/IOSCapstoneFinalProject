@@ -14,15 +14,44 @@ struct HomeView: View {
         VStack {
             HeaderView()
             VStack {
-                Text("Home Screen")
-                    .font(.largeTitle)
-                    .padding()
-            }
-            .frame(maxWidth: .infinity, maxHeight: .infinity)
-            .padding(.horizontal, 30)
-            .background(mainBg)
-            .padding(.bottom, 15)
-       
-        }
+                HStack {
+                    VStack(alignment: .leading) {
+                        Text("Little Lemon")
+                            .foregroundColor(secondaryColor) .font(.system(size: 36))
+                            .fontWeight(.medium)
+                        Text("Chicago")
+                            .foregroundColor(.white)
+                            .font(.system(size: 24))
+                            .fontWeight(.regular)
+                    }
+                    Spacer()
+                }
+                .padding(.leading, 15)
+                HStack(alignment: .bottom) {
+                    Text("We are a family owned Mediterranean restaurant, focused on traditional recipes served with a modern twist.")
+                        .foregroundColor(.white)
+                        .font(.system(size: 18))
+                        .fontWeight(.regular)
+                        .frame(maxWidth: 242)
+                        .padding(.bottom, 5)
+                    Image("Hero image")
+                        .resizable()
+                        .aspectRatio(1, contentMode: .fill)
+                        .frame(maxWidth: 147, maxHeight: 152)
+                        .cornerRadius(10)
+                        .padding(.trailing, 15)
+                }
+                .padding(.leading, 15)
+            }.frame(maxWidth: .infinity )
+           Spacer()
+            
+        }.background(mainColor)
     }
 }
+
+struct HomeView_Previews: PreviewProvider {
+    static var previews: some View {
+        HomeView().environment(\.managedObjectContext, PersistenceController.preview.container.viewContext)
+    }
+}
+
